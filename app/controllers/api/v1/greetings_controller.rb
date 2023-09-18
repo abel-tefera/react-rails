@@ -21,6 +21,7 @@ class Api::V1::GreetingsController < ApplicationController
 
   def random
     @greeting = Greeting.find_by(id: rand(1..Greeting.count))
+    render json: @greeting
   end
 
   # POST /greetings or /greetings.json
