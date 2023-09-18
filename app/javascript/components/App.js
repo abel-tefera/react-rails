@@ -1,8 +1,9 @@
 import React from 'react';
-import Greetings from "./components/greetings";
 import { useEffect, useState } from "react";
+import Greeting from './greeting';
+import axios from 'axios';
 
-const API_URL = "/api/v1/greetings";
+const API_URL = "/api/v1/greetings/random";
 
 const getData = () => {
     return axios.get(API_URL).then((response) => {
@@ -11,21 +12,21 @@ const getData = () => {
 }
 
 const App = () => {
-    const [greetings, setGreetings] = useState([]);
+    const [greeting, setGreeting] = useState([]);
 
     useEffect(() => {
         let mounted = true;
-        getData().then((items) => {
+        getData().then((item) => {
             if (mounted) {
-                setGreetings(items);
+                setGreeting(item);
             }
         })
         return () => (mounted = false);
     }, []);
 
     return (<main>
-        <h1>Greetings</h1>
-        <Greetings greetings={greetings}></Greetings>
+        <h1>Random Greeting</h1>
+        <Greeting greeting={greeting}></Greeting>
     </main>);
 }
 

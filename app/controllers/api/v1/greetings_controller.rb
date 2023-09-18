@@ -19,6 +19,10 @@ class Api::V1::GreetingsController < ApplicationController
   def edit
   end
 
+  def random
+    @greeting = Greeting.find_by(id: rand(1..Greeting.count))
+  end
+
   # POST /greetings or /greetings.json
   def create
     @greeting = Greeting.new(greeting_params)
